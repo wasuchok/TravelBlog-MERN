@@ -33,6 +33,9 @@ const Navbar = () => {
   const {colorMode, toggleColorMode} = useColorMode()
   const [logoHover, setLogoHover] = useState(false)
 
+  const user = useSelector((state) => state.user)
+  const { userInfo } = user
+
   return (
     
     <Box bg={mode('blue.200', 'blue.900')} px={4}>
@@ -66,6 +69,11 @@ const Navbar = () => {
             ))}
           </MenuList>
         </Menu>
+        {userInfo && (
+          <Link as={ReactLink} to='/admin-console'>
+            <MdAdminPanelSettings size='30' />
+          </Link>
+        )}
       </HStack>
     </HStack>
     <HStack>
@@ -97,7 +105,6 @@ const Navbar = () => {
             ))}
           </MenuList>
         </Menu>
-
         <ButtonGroup spacing='0' variant='ghost' mr='3' mt='5'>
               <IconButton as='a' href='#' icon={<FaFacebook fontSize='1.25rem' />} />
               <IconButton as='a' href='#' icon={<FaTwitter fontSize='1.25rem' />} />
